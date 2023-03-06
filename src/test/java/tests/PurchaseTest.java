@@ -1,5 +1,6 @@
 package tests;
 
+import net.bytebuddy.utility.nullability.NeverNull;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
@@ -14,5 +15,9 @@ public class PurchaseTest extends BaseTest {
         productsPage.addToCart("Sauce Labs Backpack");
         productsPage.openCart();
         cartPage.checkout();
+        checkoutPage.checkoutContinuePurchase("Heorhi", "Kushnir", "12345");
+        driver.findElement(By.id("finish")).click();
+        String succesfulMessage = driver.findElement(By.cssSelector(".title")).getText();
+        assertEquals(succesfulMessage, "Checkout: Complete!", "Purchase not completed");
     }
 }
