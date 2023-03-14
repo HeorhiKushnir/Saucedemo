@@ -1,13 +1,14 @@
 package tests;
 
 import org.openqa.selenium.By;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
 
 public class LoginTest extends BaseTest {
 
-    @Test
+    @Test(description = "Check if user can login")
     public void successfulLogin() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
@@ -15,36 +16,22 @@ public class LoginTest extends BaseTest {
         assertEquals(title, "Products", "Пользователь не залогинился");
     }
 
-    @Test
-    public void userNameIsRequired() {
-        loginPage.open();
-        loginPage.login("", "");
-        String error = loginPage.getErrorMessage();
-        assertEquals(error, "Epic sadface: Username is required", "Wrong error message");
+    @DataProvider(name = "Входящие данные для негативных тестов на логин")
+    public Object[][] getDataForLogin() {
+        return new Object[][]{
+                {"", "", "Epic sadface: Username is required"},
+                {"standard_user", "", "Epic sadface: Password is required"},
+                {"123", "123", "Epic sadface: Username and password do not match any user in this service"},
+                {"locked_out_user", "secret_sauce", "Epic sadface: Sorry, this user has been locked out."},
+        };
     }
 
-    @Test
-    public void passwordIsRequired() {
+    @Test(description = "Negative login", dataProvider = "Входящие данные для негативных тестов на логин",
+            retryAnalyzer = Retry.class)
+    public void negativeTestLogin(String username, String password, String expectedError) {
         loginPage.open();
-        loginPage.login("standard_user", "");
+        loginPage.login(username, password);
         String error = loginPage.getErrorMessage();
-        assertEquals(error, "Epic sadface: Password is required", "Wrong error message");
-    }
-
-    @Test
-    public void wrongUsernameOrPassword() {
-        loginPage.open();
-        loginPage.login("123", "123");
-        String error = loginPage.getErrorMessage();
-        assertEquals(error, "Epic sadface: Username and password do not match any user in this service",
-                "Wrong error message");
-    }
-
-    @Test
-    public void lockedUser() {
-        loginPage.open();
-        loginPage.login("locked_out_user", "secret_sauce");
-        String error = loginPage.getErrorMessage();
-        assertEquals(error, "Epic sadface: Sorry, this user has been locked out.", "Wrong error message");
+        assertEquals(error, expectedError, "Wrong error message");
     }
 }
