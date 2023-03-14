@@ -10,6 +10,7 @@ public class CheckoutPage extends BasePage{
     public static final By FIRST_NAME = By.id("first-name");
     public static final By LAST_NAME = By.id("last-name");
     public static final By POSTAL_CODE = By.id("postal-code");
+    public static final By ERROR_MESSAGE = By.cssSelector("[data-test=error]");
 
     public CheckoutPage(WebDriver driver) {
         super(driver);
@@ -23,5 +24,9 @@ public class CheckoutPage extends BasePage{
     }
     public void cancelCheckout(){
         driver.findElement(CANCEL_BUTTON).click();
+    }
+
+    public String getErrorMessage(){
+        return driver.findElement(ERROR_MESSAGE).getText();
     }
 }

@@ -21,7 +21,7 @@ public class BaseTest {
     ProductsPage productsPage;
     CartPage cartPage;
     CheckoutPage checkoutPage;
-    public static final String USER = "performance_glitch_user";
+    public static final String USER = "standard_user";
     public static final String PASSWORD = "secret_sauce";
 
     @Parameters({"browser"})

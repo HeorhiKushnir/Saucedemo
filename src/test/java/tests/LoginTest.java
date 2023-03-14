@@ -8,7 +8,7 @@ import static org.testng.Assert.assertEquals;
 
 public class LoginTest extends BaseTest {
 
-    @Test(description = "Check if user can login")
+    @Test(description = "Check if user can login", retryAnalyzer = Retry.class)
     public void successfulLogin() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");

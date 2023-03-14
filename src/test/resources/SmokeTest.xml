@@ -8,11 +8,14 @@
     <test name="Tread #1">
         <classes>
             <class name="tests.LoginTest"/>
+            <class name="tests.CheckoutTest"/>
+            <class name="tests.PurchaseTest"/>
         </classes>
     </test> <!-- Test -->
     <test name="Tread #2">
         <classes>
-            <class name="tests.PurchaseTest"/>
+            <class name="tests.CartTest"/>
+            <class name="tests.ProductsTest"/>
         </classes>
     </test> <!-- Test -->
 </suite>
