@@ -14,7 +14,7 @@ import static org.testng.Assert.assertEquals;
 public class ProductsTest extends BaseTest{
 
     @Test(description = "Items sorted by name from A to Z", retryAnalyzer = Retry.class)
-    public void sortByNameFromAToZ(){
+    public void sortByNameFromAToZ() {
         loginPage.open();
         loginPage.login(USER, PASSWORD);
         Select select = new Select(driver.findElement(By.cssSelector(".product_sort_container")));
@@ -30,7 +30,7 @@ public class ProductsTest extends BaseTest{
     }
 
     @Test(description = "Items sorted by name from Z to A", retryAnalyzer = Retry.class)
-    public void sortByNameFromZToA(){
+    public void sortByNameFromZToA() {
         loginPage.open();
         loginPage.login(USER, PASSWORD);
         Select select = new Select(driver.findElement(By.cssSelector(".product_sort_container")));
@@ -46,7 +46,7 @@ public class ProductsTest extends BaseTest{
     }
 
     @Test(description = "Items sorted by price from low to high", retryAnalyzer = Retry.class)
-    public void sortByPriceFromLowToHigh(){
+    public void sortByPriceFromLowToHigh() {
         loginPage.open();
         loginPage.login(USER, PASSWORD);
         Select select = new Select(driver.findElement(By.cssSelector(".product_sort_container")));
@@ -63,7 +63,7 @@ public class ProductsTest extends BaseTest{
     }
 
     @Test(description = "Items sorted by price from high to low", retryAnalyzer = Retry.class)
-    public void sortByPriceFromHighToLow(){
+    public void sortByPriceFromHighToLow() {
         loginPage.open();
         loginPage.login(USER, PASSWORD);
         Select select = new Select(driver.findElement(By.cssSelector(".product_sort_container")));
@@ -80,7 +80,7 @@ public class ProductsTest extends BaseTest{
     }
 
     @Test(description = "Product added to cart", retryAnalyzer = Retry.class)
-    public void addedProductToCart(){
+    public void addedProductToCart() {
         loginPage.open();
         loginPage.login(USER, PASSWORD);
         productsPage.addToCart("Sauce Labs Backpack");

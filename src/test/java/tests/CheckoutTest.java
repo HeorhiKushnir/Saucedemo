@@ -13,7 +13,7 @@ public class CheckoutTest extends BaseTest{
 
 
     @Test(description = "Succesful checkout", retryAnalyzer = Retry.class)
-    public void succesfulCheckout(){
+    public void succesfulCheckout() {
         loginPage.open();
         loginPage.login(USER, PASSWORD);
         productsPage.openCart();
@@ -33,7 +33,7 @@ public class CheckoutTest extends BaseTest{
     }
 
     @Test(description = "Negative checkout", dataProvider = "Data for checkout", retryAnalyzer = Retry.class)
-    public void negativeTestCheckout(String firstName, String lastName, String zipCode, String error){
+    public void negativeTestCheckout(String firstName, String lastName, String zipCode, String error) {
         loginPage.open();
         loginPage.login(USER, PASSWORD);
         productsPage.openCart();
@@ -64,7 +64,7 @@ public class CheckoutTest extends BaseTest{
     }
 
     @Test(description = "Check that cancel button move to cart from checkout page", retryAnalyzer = Retry.class)
-    public void cancelButton(){
+    public void cancelButton() {
         loginPage.open();
         loginPage.login(USER, PASSWORD);
         productsPage.openCart();

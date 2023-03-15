@@ -11,7 +11,7 @@ import static org.testng.Assert.assertEquals;
 public class CartTest extends BaseTest{
 
     @Test(description = "Make sure the added items are equal with cart", retryAnalyzer = Retry.class)
-    public void theAddedProductsAreCorrect(){
+    public void theAddedProductsAreCorrect() {
         loginPage.open();
         loginPage.login(USER, PASSWORD);
         List<String> addedItems = new ArrayList<>();
@@ -31,7 +31,7 @@ public class CartTest extends BaseTest{
     }
 
     @Test(description = "Check that item was removed", retryAnalyzer = Retry.class)
-    public void removeItemFromCart(){
+    public void removeItemFromCart() {
         loginPage.open();
         loginPage.login(USER, PASSWORD);
         productsPage.addToCart("Sauce Labs Backpack");
@@ -44,7 +44,7 @@ public class CartTest extends BaseTest{
     }
 
     @Test(description = "Check that we back to products page", retryAnalyzer = Retry.class)
-    public void backToProductsButton(){
+    public void backToProductsButton() {
         loginPage.open();
         loginPage.login(USER, PASSWORD);
         productsPage.openCart();
