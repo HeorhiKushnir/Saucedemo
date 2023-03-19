@@ -13,7 +13,7 @@ abstract class BasePage {
         this.driver = driver;
     }
 
-    public String getTitle(){
+    public String getTitle() {
         return driver.findElement(TITLE).getText();
     }
 }

@@ -14,17 +14,21 @@ public class LoginPage extends BasePage{
         super(driver);
     }
 
-    public void open(){
+    public void open() {
         driver.get(BASE_URL);
     }
 
-    public void login(String user, String password){
+    public void login(String user, String password) {
         driver.findElement(USERNAME_INPUT).sendKeys(user);
         driver.findElement(PASSWORD_INPUT).sendKeys(password);
         driver.findElement(LOGIN_BUTTON).click();
     }
 
-    public String getErrorMessage(){
+    public String getTitleProducts() {
+        return driver.findElement(By.cssSelector(".title")).getText();
+    }
+
+    public String getErrorMessage() {
         return driver.findElement(ERROR_MESSAGE).getText();
     }
 }
