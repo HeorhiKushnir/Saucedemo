@@ -23,21 +23,21 @@ public class CheckoutPage extends BasePage{
         super(driver);
     }
 
-    public void checkoutContinuePurchase(String name, String lastName, String postalCode){
+    public void checkoutContinuePurchase(String name, String lastName, String postalCode) {
         driver.findElement(FIRST_NAME).sendKeys(name);
         driver.findElement(LAST_NAME).sendKeys(lastName);
         driver.findElement(POSTAL_CODE).sendKeys(postalCode);
         driver.findElement(CONTINUE_BUTTON).click();
     }
-    public void cancelCheckout(){
+    public void cancelCheckout() {
         driver.findElement(CANCEL_BUTTON).click();
     }
 
-    public void finishButton(){
+    public void finishButton() {
         driver.findElement(FINISH_BUTTON).click();
     }
 
-    public String getErrorMessage(){
+    public String getErrorMessage() {
         return driver.findElement(ERROR_MESSAGE).getText();
     }
 
@@ -54,7 +54,7 @@ public class CheckoutPage extends BasePage{
         return totalPrice;
     }
 
-    public double summaryTotalPrice(){
+    public double summaryTotalPrice() {
         WebElement summaryTotal = driver.findElement(SUMMARY_PRICE);
         return Double.parseDouble(summaryTotal.getText().substring(13));
     }

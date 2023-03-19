@@ -17,23 +17,23 @@ public class CartPage extends BasePage{
     public CartPage(WebDriver driver) {
         super(driver);
     }
-    public void open(){
+    public void open() {
         driver.get(BASE_URL + "/cart.html");
     }
-    public void checkout(){
+    public void checkout() {
         driver.findElement(CHECKOUT_BUTTON).click();
     }
 
-    public void removeItem(String item){
+    public void removeItem(String item) {
         By removeItemLocator = By.xpath(String.format(removeItemXpath, item));
         driver.findElement(removeItemLocator).click();
     }
 
-    public void continueShopping(){
+    public void continueShopping() {
         driver.findElement(CONTINUE_SHOPPING_BUTTON).click();
     }
 
-    public List<WebElement> inventoryItems(){
+    public List<WebElement> inventoryItems() {
         return  driver.findElements(INVENTORY_ITEM);
     }
 }
