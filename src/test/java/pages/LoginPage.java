@@ -24,6 +24,10 @@ public class LoginPage extends BasePage{
         driver.findElement(LOGIN_BUTTON).click();
     }
 
+    public String getTitleProducts() {
+        return driver.findElement(By.cssSelector(".title")).getText();
+    }
+
     public String getErrorMessage(){
         return driver.findElement(ERROR_MESSAGE).getText();
     }

@@ -2,11 +2,15 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 public class CartPage extends BasePage{
 
     public static final By CHECKOUT_BUTTON = By.id("checkout");
     public static final By CONTINUE_SHOPPING_BUTTON = By.id("continue-shopping");
+    public static final By INVENTORY_ITEM = By.cssSelector(".inventory_item_name");
 
     String removeItemXpath = "//*[text()='%s']/ancestor::*[contains(@class, 'cart_item')]//button";
 
@@ -27,5 +31,9 @@ public class CartPage extends BasePage{
 
     public void continueShopping(){
         driver.findElement(CONTINUE_SHOPPING_BUTTON).click();
+    }
+
+    public List<WebElement> inventoryItems(){
+        return  driver.findElements(INVENTORY_ITEM);
     }
 }

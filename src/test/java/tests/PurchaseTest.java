@@ -8,7 +8,7 @@ import static org.testng.Assert.assertEquals;
 
 public class PurchaseTest extends BaseTest {
 
-    @Test(description = "Succesful purchase", retryAnalyzer = Retry.class)
+    @Test(description = "Succesful purchase")
     public void successfulPurchase() {
         loginPage.open();
         loginPage.login(USER, PASSWORD);
@@ -16,12 +16,12 @@ public class PurchaseTest extends BaseTest {
         productsPage.openCart();
         cartPage.checkout();
         checkoutPage.checkoutContinuePurchase("Heorhi", "Kushnir", "12345");
-        driver.findElement(By.id("finish")).click();
-        String succesfulMessage = driver.findElement(By.cssSelector(".title")).getText();
+        checkoutPage.finishButton();
+        String succesfulMessage = checkoutPage.getTitle();
         assertEquals(succesfulMessage, "Checkout: Complete!", "Purchase not completed");
     }
 
-    @Test(description = "Button back home move to products page", retryAnalyzer = Retry.class)
+    @Test(description = "Button back home move to products page")
     public void backHomeButton() {
         loginPage.open();
         loginPage.login(USER, PASSWORD);
@@ -29,9 +29,9 @@ public class PurchaseTest extends BaseTest {
         productsPage.openCart();
         cartPage.checkout();
         checkoutPage.checkoutContinuePurchase("Heorhi", "Kushnir", "12345");
-        driver.findElement(By.id("finish")).click();
-        driver.findElement(By.id("back-to-products")).click();
-        String title = driver.findElement(By.cssSelector(".title")).getText();
+        checkoutPage.finishButton();
+        checkoutPage.backToProductsButton();
+        String title = checkoutPage.getTitle();
         assertEquals(title, "Products", "Wrong message");
     }
 }

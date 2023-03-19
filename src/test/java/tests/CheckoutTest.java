@@ -12,14 +12,14 @@ import static org.testng.Assert.assertEquals;
 public class CheckoutTest extends BaseTest{
 
 
-    @Test(description = "Succesful checkout", retryAnalyzer = Retry.class)
+    @Test(description = "Succesful checkout")
     public void succesfulCheckout() {
         loginPage.open();
         loginPage.login(USER, PASSWORD);
         productsPage.openCart();
         cartPage.checkout();
         checkoutPage.checkoutContinuePurchase("firstName","lastName","zipCode");
-        String title = driver.findElement(By.cssSelector(".title")).getText();
+        String title = checkoutPage.getTitle();
         assertEquals(title, "Checkout: Overview", "Wrong error message");
     }
 
@@ -32,7 +32,7 @@ public class CheckoutTest extends BaseTest{
         };
     }
 
-    @Test(description = "Negative checkout", dataProvider = "Data for checkout", retryAnalyzer = Retry.class)
+    @Test(description = "Negative checkout", dataProvider = "Data for checkout")
     public void negativeTestCheckout(String firstName, String lastName, String zipCode, String error) {
         loginPage.open();
         loginPage.login(USER, PASSWORD);
@@ -43,7 +43,7 @@ public class CheckoutTest extends BaseTest{
         assertEquals(errorMessage, error, "Wrong error message");
     }
 
-    @Test(description = "Equals total value with sum of items price", retryAnalyzer = Retry.class)
+    @Test(description = "Equals total value with sum of items price")
     public void equalsTotalPrice() {
         loginPage.open();
         loginPage.login(USER, PASSWORD);
@@ -53,24 +53,19 @@ public class CheckoutTest extends BaseTest{
         productsPage.openCart();
         cartPage.checkout();
         checkoutPage.checkoutContinuePurchase("firstName","lastName","zipCode");
-        List<WebElement> prices = driver.findElements(By.className("inventory_item_price"));
-        double totalPrice = 0;
-        for (WebElement price : prices) {
-            totalPrice += Double.parseDouble(price.getText().substring(1));
-        }
-        WebElement summaryTotal = driver.findElement(By.cssSelector(".summary_subtotal_label"));
-        double summaryTotalPrice = Double.parseDouble(summaryTotal.getText().substring(13));
+        double totalPrice = checkoutPage.totalPrice();
+        double summaryTotalPrice = checkoutPage.summaryTotalPrice();
         assertEquals(totalPrice, summaryTotalPrice, "Wrong sum of price");
     }
 
-    @Test(description = "Check that cancel button move to cart from checkout page", retryAnalyzer = Retry.class)
+    @Test(description = "Check that cancel button move to cart from checkout page")
     public void cancelButton() {
         loginPage.open();
         loginPage.login(USER, PASSWORD);
         productsPage.openCart();
         cartPage.checkout();
         checkoutPage.cancelCheckout();
-        String title = driver.findElement(By.cssSelector(".title")).getText();
+        String title = checkoutPage.getTitle();
         assertEquals(title, "Your Cart", "Wrong error message");
     }
 }

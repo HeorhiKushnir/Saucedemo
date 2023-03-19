@@ -1,6 +1,5 @@
 package tests;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -8,11 +7,11 @@ import static org.testng.Assert.assertEquals;
 
 public class LoginTest extends BaseTest {
 
-    @Test(description = "Check if user can login", retryAnalyzer = Retry.class)
+    @Test(description = "Check if user can login")
     public void successfulLogin() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
-        String title = driver.findElement(By.cssSelector(".title")).getText();
+        String title = loginPage.getTitleProducts();
         assertEquals(title, "Products", "Пользователь не залогинился");
     }
 
@@ -26,8 +25,7 @@ public class LoginTest extends BaseTest {
         };
     }
 
-    @Test(description = "Negative login", dataProvider = "Входящие данные для негативных тестов на логин",
-            retryAnalyzer = Retry.class)
+    @Test(description = "Negative login", dataProvider = "Входящие данные для негативных тестов на логин")
     public void negativeTestLogin(String username, String password, String expectedError) {
         loginPage.open();
         loginPage.login(username, password);
