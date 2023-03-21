@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,24 +15,23 @@ public class ProductsPage extends BasePage{
     public static final By CART_BADGE = By.cssSelector(".shopping_cart_badge");
     public static final By PRODUCT_SORT = By.cssSelector(".product_sort_container");
     public static final By ITEM_PRICE = By.className("inventory_item_price");
-
     public ProductsPage(WebDriver driver) {
         super(driver);
     }
-
+    @Step("Add item to cart")
     public void addToCart(String product) {
         By addToCartLocator = By.xpath(String.format(addToCartXpath, product));
         driver.findElement(addToCartLocator).click();
     }
-
+    @Step("Opening cart")
     public void openCart() {
         driver.findElement(CART).click();
     }
-
+    @Step("Choice of sorting items")
     public WebElement productSort() {
         return driver.findElement(PRODUCT_SORT);
     }
-
+    @Step("Getting a list of products")
     public List<String> listOfItems() {
         List<WebElement> items = driver.findElements(By.cssSelector(".inventory_item_name"));
         List<String> itemNames = new ArrayList<>();
@@ -40,7 +40,7 @@ public class ProductsPage extends BasePage{
         }
         return itemNames;
     }
-
+    @Step("Getting a list of prices")
     public List<Double> listOfPrices() {
         List<WebElement> prices = driver.findElements(ITEM_PRICE);
         List<Double> priceValues = new ArrayList<>();
@@ -50,7 +50,7 @@ public class ProductsPage extends BasePage{
         }
         return priceValues;
     }
-
+    @Step("Getting information about the cart icon")
     public String cartBadge() {
         return driver.findElement(CART_BADGE).getText();
     }
