@@ -20,8 +20,6 @@ public class TestListener implements ITestListener {
     public void onTestSuccess(ITestResult iTestResult) {
         System.out.println(String.format("======================================== FINISHED TEST %s Duration: %ss ========================================", iTestResult.getName(),
                 getExecutionTime(iTestResult)));
-        WebDriver driver = (WebDriver) iTestResult.getTestContext().getAttribute("driver");
-        AllureUtils.takeScreenshot(driver);
     }
 
     @Override

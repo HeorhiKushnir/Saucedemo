@@ -20,13 +20,14 @@ public class LoginPage extends BasePage{
         driver.get(BASE_URL);
     }
 
-    @Step("Login by user '{user}'")
+    @Step("Login by user '{user}', '{password}'")
     public void login(String user, String password) {
         driver.findElement(USERNAME_INPUT).sendKeys(user);
         driver.findElement(PASSWORD_INPUT).sendKeys(password);
         driver.findElement(LOGIN_BUTTON).click();
     }
 
+    @Step("Finding page title")
     public String getTitleProducts() {
         return driver.findElement(By.cssSelector(".title")).getText();
     }
